@@ -139,3 +139,38 @@ All patient profiles and readings are fictional. They are not experimental recor
 Original group project: *MindMonitor: A Web-Based Telemedicine Platform for Mental Health Monitoring*.
 
 NeuroPulse is a newly developed demonstration informed by that concept. Original group contributions and subsequent implementation should be distinguished.
+
+
+## Premium Biophilic Website Design
+
+**Visual direction:** Botanical Digital Health
+
+The website uses a nature-inspired design system
+with refined typography, organic shapes, responsive
+layouts, subtle motion, and accessible interaction
+states.
+
+### Design Tokens
+
+| Role | Value |
+|---|---|
+| Primary | `#253C31` |
+| Secondary | `#718B76` |
+| Accent | `#B88A69` |
+| Surface | `#F7F5ED` |
+| Pale | `#E2EBDF` |
+
+### Enhancement Architecture
+
+- `biophilic-premium.css`: Independent visual layer
+- `biophilic-premium.js`: Progressive UI enhancement
+- Existing application files: Preserved
+
+The design enhancement does not introduce a backend,
+clinical diagnosis, authentication, or hardware
+integration. Existing project limitations still apply.
+
+### Accessibility
+
+The enhancement includes keyboard focus indicators,
+responsive typography, and reduced-motion support.

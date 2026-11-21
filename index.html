@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="NeuroPulse: physiological monitoring and telemedicine research demonstration">
+<title>NeuroPulse | Intelligent Telemedicine</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="#home"><span class="logo-mark">♥</span> NeuroPulse</a>
+  <nav aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#patient">Patient</a>
+    <a href="#doctor">Doctor</a>
+    <a href="#sensors">Sensors</a>
+    <a href="#appointments">Appointments</a>
+    <a href="#research">Research</a>
+  </nav>
+  <span class="demo-label">RESEARCH DEMO</span>
+</header>
+
+<main>
+<section id="home" class="page">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">BIOMEDICAL ENGINEERING / DIGITAL HEALTH</div>
+      <h1>Connected care.<br><em>Better visibility.</em></h1>
+      <p class="lead">A web-based physiological monitoring and telemedicine demonstration combining multi-sensor concepts, patient dashboards, clinician review, and remote healthcare workflows.</p>
+      <div class="button-row">
+        <a class="btn" href="#patient">Explore Patient Dashboard</a>
+        <a class="btn btn-outline" href="#doctor">Doctor Workspace</a>
+      </div>
+      <p class="disclaimer">Illustrative synthetic data · Fictional patients · Not for clinical use</p>
+    </div>
+    <div class="hero-visual">
+      <div class="visual-top"><span>NEUROPULSE / MONITORING</span><span class="live-dot">● DEMO</span></div>
+      <div class="visual-heart">♥</div>
+      <svg viewBox="0 0 600 160" role="img" aria-label="Illustrative physiological waveform">
+        <path d="M0 80 H80 L110 80 L140 20 L180 145 L220 58 L245 80 H350 L380 80 L410 20 L450 145 L490 58 L515 80 H600" fill="none" stroke="#b7f1d3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="visual-tags"><span>Heart rate</span><span>Temperature</span><span>SpO₂</span><span>GSR</span></div>
+    </div>
+  </div>
+  <div class="section-heading"><div class="eyebrow">PLATFORM MODULES</div><h2>Explore the system</h2></div>
+  <div class="feature-grid">
+    <a href="#patient" class="feature"><div class="feature-icon">♡</div><h3>Patient Dashboard</h3><p>Measurements, trends, and self-reported check-ins.</p><span>Explore module →</span></a>
+    <a href="#doctor" class="feature"><div class="feature-icon">✚</div><h3>Doctor Workspace</h3><p>Fictional patient records and demonstration notes.</p><span>Explore module →</span></a>
+    <a href="#sensors" class="feature"><div class="feature-icon">⌁</div><h3>Sensor Laboratory</h3><p>Generate signals and export reproducible CSV data.</p><span>Explore module →</span></a>
+    <a href="#appointments" class="feature"><div class="feature-icon">▦</div><h3>Appointments</h3><p>Explore a browser-local consultation workflow.</p><span>Explore module →</span></a>
+  </div>
+</section>
+
+<section id="patient" class="page" hidden>
+  <div class="eyebrow">PATIENT EXPERIENCE</div>
+  <h1>Patient Dashboard</h1>
+  <p class="lead">Illustrative physiological signals from fictional patient profiles.</p>
+  <div class="toolbar">
+    <label>Patient profile <select id="patientSelect"></select></label>
+    <button class="btn" id="nextReading">Generate New Reading</button>
+  </div>
+  <div class="metric-grid">
+    <article class="metric"><span>Heart Rate</span><strong id="heartRate">--</strong><small>bpm</small></article>
+    <article class="metric"><span>Temperature</span><strong id="temperature">--</strong><small>°C</small></article>
+    <article class="metric"><span>Oxygen Saturation</span><strong id="spo2">--</strong><small>%</small></article>
+    <article class="metric"><span>GSR Signal</span><strong id="gsr">--</strong><small>raw ADC units</small></article>
+  </div>
+  <div class="two-col">
+    <article class="panel"><h2>Heart Rate Trend</h2><canvas id="heartChart" width="700" height="280"></canvas></article>
+    <article class="panel"><h2>Temperature Trend</h2><canvas id="temperatureChart" width="700" height="280"></canvas></article>
+  </div>
+  <article class="panel">
+    <h2>Daily Well-being Check-in</h2>
+    <p>This self-report is not a psychological or clinical assessment.</p>
+    <label>How is the day going?
+      <select id="mood"><option>Comfortable</option><option>Tired</option><option>Uneasy</option><option>Prefer not to say</option></select>
+    </label>
+    <label>Optional demonstration note <textarea id="checkinNote" maxlength="300" placeholder="Enter a fictional note"></textarea></label>
+    <button class="btn" id="saveCheckin">Save Check-in</button>
+    <p id="checkinStatus" role="status"></p>
+  </article>
+</section>
+
+<section id="doctor" class="page" hidden>
+  <div class="eyebrow">CLINICIAN EXPERIENCE</div>
+  <h1>Doctor Dashboard</h1>
+  <p class="lead">Review fictional patient profiles and document simulated follow-ups.</p>
+  <article class="panel"><h2>Patient Directory</h2><div id="patientDirectory" class="directory"></div></article>
+  <div class="two-col">
+    <article class="panel"><h2>Selected Patient</h2><div id="doctorSummary"></div></article>
+    <article class="panel">
+      <h2>Demonstration Clinical Note</h2>
+      <textarea id="doctorNote" maxlength="500" placeholder="Fictional follow-up note"></textarea>
+      <button class="btn" id="saveDoctorNote">Save Note</button>
+      <p id="doctorStatus" role="status"></p>
+    </article>
+  </div>
+</section>
+
+<section id="sensors" class="page" hidden>
+  <div class="eyebrow">SENSOR DATA SIMULATION</div>
+  <h1>Sensor Laboratory</h1>
+  <p class="lead">Explore synthetic heart rate, temperature, SpO₂, and GSR readings. No physical sensors are connected.</p>
+  <article class="panel">
+    <div class="toolbar">
+      <label>Signal profile
+        <select id="signalProfile">
+          <option value="baseline">Baseline</option>
+          <option value="activity">Light Activity</option>
+          <option value="variation">Variable Signal</option>
+        </select>
+      </label>
+      <button class="btn" id="generateSignals">Generate Dataset</button>
+      <button class="btn btn-outline" id="exportCsv">Export CSV</button>
+    </div>
+    <canvas id="sensorChart" width="1000" height="340"></canvas>
+    <p class="disclaimer">Signal variations are mathematically generated. They are not stress diagnoses or clinical measurements.</p>
+  </article>
+  <article class="panel">
+    <h2>Proposed Hardware Workflow</h2>
+    <div class="pipeline">
+      <div>LM35 · GSR · Pulse Sensor · MAX30102</div>
+      <span>↓</span><div>Arduino UNO / ESP8266</div>
+      <span>↓</span><div>Data Acquisition and Communication</div>
+      <span>↓</span><div>Patient and Doctor Interfaces</div>
+    </div>
+  </article>
+</section>
+
+<section id="appointments" class="page" hidden>
+  <div class="eyebrow">TELEMEDICINE WORKFLOW</div>
+  <h1>Appointment Scheduling</h1>
+  <p class="lead">A local demonstration of remote consultation scheduling. No real appointment is created.</p>
+  <div class="two-col">
+    <form id="appointmentForm" class="panel">
+      <h2>New Appointment</h2>
+      <label>Patient <select id="appointmentPatient"></select></label>
+      <label>Consultation type <select id="consultationType"><option>General Follow-up</option><option>Physiological Data Review</option><option>Well-being Conversation</option></select></label>
+      <label>Date <input type="date" id="appointmentDate" required></label>
+      <label>Time <input type="time" id="appointmentTime" required></label>
+      <button type="submit" class="btn">Save Appointment</button>
+      <p id="appointmentStatus" role="status"></p>
+    </form>
+    <article class="panel">
+      <h2>Upcoming Demonstrations</h2>
+      <div id="appointmentList"></div>
+      <button class="btn btn-outline" id="clearAppointments">Clear All</button>
+    </article>
+  </div>
+</section>
+
+<section id="research" class="page" hidden>
+  <div class="eyebrow">RESEARCH AND IMPLEMENTATION</div>
+  <h1>About NeuroPulse</h1>
+  <div class="two-col">
+    <article class="panel">
+      <h2>Project Background</h2>
+      <p>NeuroPulse is a new software demonstration informed by the original group project <em>MindMonitor: A Web-Based Telemedicine Platform for Mental Health Monitoring</em>.</p>
+      <p>The original concept explored physiological sensing, Arduino-based acquisition, and patient–doctor web interfaces.</p>
+    </article>
+    <article class="panel">
+      <h2>Implementation Status</h2>
+      <p>The present implementation provides browser-based dashboards, synthetic readings, charts, appointment simulation, and local demonstration notes.</p>
+      <p>It does not implement secure authentication, physical sensor communication, clinical AI, or production healthcare infrastructure.</p>
+    </article>
+  </div>
+  <article class="panel">
+    <h2>Repository Documentation</h2>
+    <p><a href="docs/architecture.md">Architecture</a> · <a href="docs/provenance.md">Research provenance</a> · <a href="hardware/README.md">Hardware notes</a> · <a href="data/README.md">Synthetic dataset</a></p>
+    <p><a href="https://github.com/Sejuti-Dhali/NeuroPulse">GitHub source code</a></p>
+  </article>
+</section>
+</main>
+<footer>© NeuroPulse · Research demonstration · Not a medical device · No real patient data</footer>
+</body>
+</html>
